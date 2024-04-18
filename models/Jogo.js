@@ -4,7 +4,7 @@ const {DataTypes} = require ("sequelize");
 const Jogo = conn.define ("Jogo", {
     jogoNickname: {
         type: DataTypes.STRING,
-        require:false,
+        require:true,
     },
     nome: {
         type: DataTypes.STRING,

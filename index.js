@@ -19,8 +19,9 @@ app.get("/usuarios/novo",(req,res)=>{
 });
 
 app.post("/usuarios/novo", async (req,res) => {
-    const nickname = req.body.nickname;
-    const nome = req.body.nome;
+    try{
+    const nickname = req.body;
+    const nome = req.body;
 
     const dadosUsuario = {
         nickname,
@@ -30,6 +31,10 @@ app.post("/usuarios/novo", async (req,res) => {
     const usuario = await Usuario.create(dadosUsuario);
 
 res.send("Usuário inserido sob o id " + usuario.id);
+}catch (error) {
+    console.error("erro ao inserir usuário:",error);
+    res.status(500).send("Erro ao inserir usuário")
+               }
 });
 
 
@@ -54,7 +59,7 @@ app.post("/jogos/novo", async (req,res) => {
 
     const jogo = await Jogo.create(dadosJogo);
 
-res.send("Usuário inserido sob o id " + usuario.id);
+res.send("Usuário inserido sob o id " + jogo.id);
 });
 
 
