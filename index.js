@@ -18,50 +18,46 @@ app.get("/usuarios/novo",(req,res)=>{
     res.sendFile(`${__dirname}/views/formUsuario.html`);
 });
 
-app.post("/usuarios/novo", async (req,res) => {
-    try{
-    const nickname = req.body;
-    const nome = req.body;
+app.post("/usuarios/novo", async (req, res) => {
+    try {
+        const { nickname, nome } = req.body;
+        
+        const dadosUsuario = {
+            nickname,
+            nome,
+        };
+        const usuario = await Usuario.create(dadosUsuario);
 
-    const dadosUsuario = {
-        nickname,
-        nome,
-    };
-
-    const usuario = await Usuario.create(dadosUsuario);
-
-res.send("Usuário inserido sob o id " + usuario.id);
-}catch (error) {
-    console.error("erro ao inserir usuário:",error);
-    res.status(500).send("Erro ao inserir usuário")
-               }
+        res.send("Usuário inserido sob o id " + usuario.id);
+    } catch (error) {
+        console.error("Erro ao inserir usuário:", error);
+        res.status(500).send("Erro ao inserir usuário");
+    }
 });
 
 
-////
-app.get("/jogos/novo",(req,res)=>{
+app.get("/jogos/novo", (req, res) => {
     res.sendFile(`${__dirname}/views/formJogo.html`);
 });
 
-app.post("/jogos/novo", async (req,res) => {
-    const jogoNickname = req.body.jogoNickname;
-    const nome = req.body.nome;
-    const valorJogo = req.body.valorJogo;
-    const descricaoJogo = req.body.descricaoJogo;
+app.post("/jogos/novo", async (req, res) => {
+    try {
+        const { nome, valorJogo, descricaoJogo} = req.body;
+        
+        const dadosJogo = {
+            nome,
+            valorJogo, 
+            descricaoJogo,
+        };
+        const jogo = await Jogo.create(dadosJogo);
+        console.log(jogo)
 
-    const dadosJogo = {
-        jogoNickname,
-        nome,
-        valorJogo,
-        descricaoJogo,
-
-    };
-
-    const jogo = await Jogo.create(dadosJogo);
-
-res.send("Usuário inserido sob o id " + jogo.id);
+        res.send("Jogo inserido sob o id " + jogo.id);
+    } catch (error) {
+        console.error("Erro ao inserir jogo:", error);
+        res.status(500).send("Erro ao inserir jogo");
+    }
 });
-
 
 
 app.listen(8000, () =>{

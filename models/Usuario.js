@@ -4,11 +4,11 @@ const {DataTypes} = require ("sequelize");
 const Usuario = conn.define ("Usuario", {
     nickname:{
         type: DataTypes.STRING,
-        require:true,
+        required:true
     },
     nome: {
         type: DataTypes.STRING,
-        required: true,
+        required: false,
     },
 });
 
