@@ -5,7 +5,14 @@ const Usuario = require ("./models/Usuario");
 const Jogo = require ("./models/Jogo");
 
 const express = require("express");
+const exphbs = require("express-handlebars")
+
+//instalacao do servidor:
 const app = express();
+
+//vinculação do handlebars ao express:
+app.engine("handlebars", exphbs.engine());
+app.set("view engine", "handlebars");
 
 app.use(
     express.urlencoded({
@@ -15,7 +22,7 @@ app.use(
 app.use(express.json());
 
 app.get("/usuarios/novo",(req,res)=>{
-    res.sendFile(`${__dirname}/views/formUsuario.html`);
+    res.render("formUsuario");
 });
 
 app.post("/usuarios/novo", async (req, res) => {
@@ -65,7 +72,7 @@ app.listen(8000, () =>{
 })
 
 conn
-.authenticate()
+.sync()
 .then(() => {
     console.log("Conectado ao banco de dados com sucesso!");
 }).catch((err) => {

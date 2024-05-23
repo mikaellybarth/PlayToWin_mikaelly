@@ -17,6 +17,7 @@
     "handlebars": "^4.7.8",
     "nodemon": "^3.1.0",
     "pg": "^8.11.5",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.3",
+    "sequelizer": "^1.1.4"
   }
 }
